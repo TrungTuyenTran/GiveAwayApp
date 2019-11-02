@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import { StyleSheet, View, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard, TouchableOpacity, Text } from 'react-native';
 import Loader from '../../../controls/Loader'
 import UserService from '../../../services/UserServices'
 import LoginFormInput from '../Login/FormInput'
@@ -14,33 +14,53 @@ class LoginScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            loading: false
+            loading: false,
+            userName: '',
+            password: ''
         }
     }
 
-    tapRegister = function () {
+    tapSignIn = function () {
         this.setState({ loading: true })
         const callback = function (res, err) {
             this.setState({ loading: false })
             if (err) {
-                this.props.navigation.navigate('Register', { 'json': err.message })
+                alert(err.message)
             } else {
                 this.props.navigation.navigate('Register', { 'json': JSON.parse(res) })
             }
         }.bind(this)
-        UserService.login('donor1', 'password', callback)
+        UserService.login(this.state.userName, this.state.password, callback)
     }.bind(this)
 
     render() {
         return (
-            <TouchableWithoutFeedback style={styles.container} onPress={Keyboard.dismiss} accessible={false}>
-                <View style={styles.container}>
-                    <View style={styles.container}>
-                        <KeyboardAvoidingView behavior="position" style={styles.container}>
+            <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss} accessible={false}>
+                <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1, justifyContent: 'center' }}>
+                        <KeyboardAvoidingView behavior="position" style={{ flex: 1 }}>
                             <LoginLogo />
-                            <LoginFormInput />
-                            <LoginButtons />
+                            <LoginFormInput userName={this.state.userName} password={this.state.password}
+                                passwordOnChanged={password => {
+                                    this.setState(
+                                        { password: password }
+                                    )
+                                }}
+                                userNameOnChanged={userName => {
+                                    this.setState(
+                                        { userName: userName }
+                                    )
+                                }} />
+                            <LoginButtons signInOnPress={this.tapSignIn} />
                         </KeyboardAvoidingView>
+                        <View style={styles.bottomView}>
+                            <TouchableOpacity
+                                style={styles.touchableOpacity}
+                                onPress={() => { this.props.navigation.navigate('Home') }}
+                            >
+                                <Text style={styles.buttonWithoutAccess}>Access without Login</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                     <Loader loading={this.state.loading} />
                 </View>
@@ -67,7 +87,24 @@ const styles = StyleSheet.create({
     },
     backgroundImage: {
         position: 'absolute', width: '100%', height: '100%',
-    }
+    },
+    bottomView: {
+        width: '100%',
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'absolute',
+        bottom: 50
+    },
+    touchableOpacity: {
+        position: 'absolute',
+        flex: 1,
+        alignItems: 'center', justifyContent: 'center'
+    },
+    buttonWithoutAccess: {
+        fontSize: 14,
+        color: '#007aff'
+    },
 });
 
 export default LoginScreen;

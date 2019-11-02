@@ -12,7 +12,7 @@ export default class TitleTextInput extends Component {
         }
     }
 
-    _start = function() {
+    _start = function () {
         return Animated.parallel([
             Animated.timing(this.state.slideInUp, {
                 toValue: 1,
@@ -56,6 +56,8 @@ export default class TitleTextInput extends Component {
                     style={titleTextInputStyle.textInput}
                     secureTextEntry={this.props.isPassword}
                     placeholder={this.props.placeholder}
+                    onChange= {(event) => {this.props.onChangeContent(event.nativeEvent.text)}
+                    }
                 />
                 <View style={titleTextInputStyle.line}></View>
             </Animated.View>

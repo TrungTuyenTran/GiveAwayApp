@@ -1,11 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, Text, Button } from 'react-native';
+import { StyleSheet, View, Button  } from 'react-native';
+import CONFIG from '../../../configs/Constants';
+import HomeBanner from '../home/Banner'
 
 class HomeScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>Home Screen</Text>
+                <HomeBanner/>
                 <Button
                     title="Go to Detail"
                     onPress={
@@ -17,8 +19,8 @@ class HomeScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: { 
-        flex: 1, alignItems: 'center', justifyContent: 'center' 
+    container: {
+        flex: 1, alignItems: 'center'
     }
 })
 

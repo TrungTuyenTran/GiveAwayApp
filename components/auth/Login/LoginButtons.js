@@ -66,7 +66,8 @@ class LoginButtons extends Component {
                         <Ripple 
                             style={{ flex: 1, alignItems: 'center', justifyContent: 'center', width:'100%', height:'100%'}}
                             rippleSize={244}
-                            rippleDuration={800}>
+                            rippleDuration={800}
+                            onPress={this.props.signInOnPress}>
                             <Text style={LoginButtonsStyles.signInTextStyle}> Sign In </Text>
                         </Ripple>
                     </Animated.View>
@@ -74,7 +75,8 @@ class LoginButtons extends Component {
                         <Ripple 
                             style={{ flex: 1, alignItems: 'center', justifyContent: 'center', width:'100%', height:'100%'}}
                             rippleSize={244}
-                            rippleDuration={800}>
+                            rippleDuration={800}
+                            onPress={this.props.signUpOnPress}>
                             <Text style={LoginButtonsStyles.signUpTextStyle}> Sign Up </Text>
                         </Ripple>
                     </Animated.View>

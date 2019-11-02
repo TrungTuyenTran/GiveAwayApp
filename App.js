@@ -4,7 +4,7 @@ import { StyleSheet, View, Dimensions, TabBarIOS, Text } from 'react-native';
 import { NativeRouter, Route, Link } from "react-router-native";
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import HomeScreen from './components/main/Home';
+import HomeScreen from './components/main/home/Home';
 import LoginScreen from './components/auth/Login/Login';
 import RegisterScreen from './components/auth/Register';
 import ForgotPasswordScreen from './components/auth/ForgotPassword';
@@ -43,7 +43,7 @@ const ProfileNavigator = createStackNavigator(
 )
 
 const TabNavigator = createBottomTabNavigator({
-  Main: MainNavigator,
+  Home: MainNavigator,
   User: ProfileNavigator,
 });
 

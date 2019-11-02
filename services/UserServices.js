@@ -8,8 +8,8 @@ export default class UserService {
     // Login
     static async login(username, password, callback) {
         let paramsBody = {
-            username: 'donor1',
-            password: 'password',
+            username: username,
+            password: password,
         }
         BaseServices.request(CONFIG.baseURL + '/auth/login', CONFIG.POST, null, paramsBody)
             .then((response) => response.json())
@@ -26,7 +26,7 @@ export default class UserService {
                         callback(Parser.parseUser(res.data.user, res.data.roles), null)
                         break
                     default:
-                        console.log("Tuyen Error: " + JSON.stringify(res))
+                        console.log("Error: " + JSON.stringify(res))
                         callback(null, Parser.parseError(res.status, res.message))
                         break
                 }
