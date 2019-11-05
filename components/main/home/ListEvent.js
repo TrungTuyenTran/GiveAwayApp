@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ActivityIndicator, StyleSheet, View, Dimensions, Image, FlatList, Text } from 'react-native';
 import EventServices from '../../../services/EventServices'
 import CONFIG from '../../../configs/Constants';
+import EventCell from '../../../views/EventCell';
 const { width } = Dimensions.get('window')
 
 class ListEvents extends Component {
@@ -65,9 +66,10 @@ class ListEvents extends Component {
                         data={this.state.events}
                         renderItem=
                         {({ item }) =>
-                            <View style={ListEventsStyles.item}>
-                                <Text>{item.name}</Text>
-                            </View>
+                        <EventCell
+                            image={item.avatar} 
+                            title={item.name}
+                            description={item.description}/>
                         }
                         bounces={true}
                         refreshing={this.state.isFetching}
@@ -123,7 +125,8 @@ const ListEventsStyles = StyleSheet.create({
         flex: 1,
         marginTop: CONFIG.constraintLayout(10),
         paddingLeft: 5,
-        paddingRight: 5
+        paddingRight: 5,
+        backgroundColor: '#F5F5F5'
     },
 
     item: { 
