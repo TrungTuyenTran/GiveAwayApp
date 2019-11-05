@@ -9,6 +9,10 @@ export default class BaseService {
             accessToken = JSON.parse(login_session).access_token
         }
         console.log("Token: " + accessToken)
+        var bodyContent = null
+        if(body != null) {
+            bodyContent = JSON.stringify(body)
+        }
         return fetch(url, {
             method: method,
             headers: {
@@ -16,7 +20,7 @@ export default class BaseService {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + accessToken
             },
-            body: JSON.stringify(body)
+            body: bodyContent
         })
     }
 }

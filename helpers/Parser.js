@@ -19,6 +19,25 @@ export default class Parser {
         return JSON.stringify(user)
     }
 
+    static parseEvent(data) {
+        let event = {
+            id: data.id,
+            name: data.name,
+            status: data.status,
+            avatar: data.avatar,
+            description: data.description,
+            text: data.text,
+            goal_item: data.goal_item,
+            start_date: data.start_date,
+            end_date: data.end_date,
+            location: data.location,
+            created_at: data.created_at,
+            updated_at: data.updated_at,
+            user: JSON.parse(Parser.parseUser(data.user))
+        }
+        return JSON.stringify(event)
+    }
+
     static parseData(response) {
         if (response) {
             switch (response.meta.status) {
