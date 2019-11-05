@@ -67,9 +67,10 @@ class ListEvents extends Component {
                         renderItem=
                         {({ item }) =>
                         <EventCell
-                            image={item.avatar} 
-                            title={item.name}
-                            description={item.description}/>
+                            event={item}
+                            transitionToDetail={(event) => {
+                                this.props.transitionToDetail(event)
+                            }}/>
                         }
                         bounces={true}
                         refreshing={this.state.isFetching}

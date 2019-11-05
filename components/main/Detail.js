@@ -2,10 +2,17 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 
 class DetailScreen extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            event: JSON.stringify(props.navigation.getParam('event', 'abc'))
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <Text>Detail Screen</Text>
+                <Text>{this.state.event}</Text>
             </View>
         );
     }

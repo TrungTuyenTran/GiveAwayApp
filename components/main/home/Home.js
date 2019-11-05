@@ -9,6 +9,10 @@ class HomeScreen extends React.Component {
 
     heightBanner = width / 2
 
+    transitionToDetail = (event) => {
+        this.props.navigation.navigate('Detail', { 'event': event })
+    }
+
     static navigationOptions = {
         title: 'Home',
         headerStyle: {
@@ -86,6 +90,7 @@ class HomeScreen extends React.Component {
                                 this.currentBanner.current.updateAutoPlay(true)
                             }
                         }}
+                        transitionToDetail={this.transitionToDetail}
                     />
                 </View>
                 <View style={{
